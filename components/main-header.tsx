@@ -1,5 +1,5 @@
 import NavLink from "./nav-link";
-import { LogButton } from "./login-button";
+import { LoginButton } from "./login-button";
 
 export default function MainHeader() {
   return (
@@ -18,7 +18,7 @@ export default function MainHeader() {
               <NavLink href={"/music"}>Music</NavLink>
             </li>
 
-            <LogButton />
+            <LoginButton />
           </ul>
         </nav>
       </header>
