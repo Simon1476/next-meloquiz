@@ -20,7 +20,13 @@ export default async function MainHeader() {
             <li>
               <NavLink href={"/music"}>Music</NavLink>
             </li>
-            {session?.user ? <SignOutButton /> : <SignInButton />}
+            {session?.user ? (
+              <>
+                <SignOutButton /> <span>{session.user?.name}</span>
+              </>
+            ) : (
+              <SignInButton />
+            )}
           </ul>
         </nav>
       </header>
