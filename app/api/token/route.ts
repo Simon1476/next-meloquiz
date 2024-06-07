@@ -9,5 +9,5 @@ export async function GET() {
   if (session) {
     accessToken = (await getAccessToken(userEmail)) as string;
   }
-  return Response.json(accessToken);
+  return Response.json(accessToken || "");
 }
