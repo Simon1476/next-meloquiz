@@ -2,6 +2,7 @@
 import { signIn } from "@/auth";
 import { signOut } from "@/auth";
 import { prisma } from "./prisma";
+import { getUserEmail } from "./session";
 
 export async function SignIn() {
   return await signIn("spotify");
@@ -17,10 +18,12 @@ export async function SignOut() {
   return await signOut();
 }
 
-export async function getAccessToken(email: string) {
+export async function getAccessToken() {
+  const email = await getUserEmail();
+
   const user = await prisma.user.findUnique({
     where: {
-      email,
+      email: email,
     },
     select: {
       id: true,

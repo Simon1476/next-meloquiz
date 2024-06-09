@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 
-export const session = async () => {
+export const getUserEmail = async () => {
   const session = await auth();
-  return session;
+  const email = session?.user?.email as string;
+  return email;
 };

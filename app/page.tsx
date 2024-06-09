@@ -1,8 +1,9 @@
+import { auth } from "@/auth";
 import Player from "@/components/player";
 
 export default async function Home() {
   return (
-    <main className="h-screen pt-24">
+    <main className="max-w-6xl mx-auto h-screen pt-24">
       <section className="flex flex-col gap-4 items-center gap-max-w-screen-xl mx-auto font-bold my-5 text-white">
         <h2 className="text-4xl"></h2>
         <p className="text-2xl">

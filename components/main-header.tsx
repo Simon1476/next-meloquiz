@@ -20,7 +20,7 @@ export default async function MainHeader() {
               <NavLink href={"/rankings"}>Ranking</NavLink>
             </li>
             <li>
-              <NavLink href={"/music"}>Music</NavLink>
+              <NavLink href={"/myMusic"}>My music</NavLink>
             </li>
             {session?.user ? (
               <>
