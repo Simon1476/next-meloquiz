@@ -1,7 +1,6 @@
 "use server";
-import { signIn } from "@/auth";
+import { prisma, signIn } from "@/auth";
 import { signOut } from "@/auth";
-import { prisma } from "./prisma";
 import { getUserEmail } from "./session";
 
 export async function SignIn() {
@@ -15,12 +14,13 @@ export async function SignOut() {
     },
   });
 
-  return await signOut();
+  return await signOut({ redirect: true, redirectTo: "/" });
 }
 
 export async function getAccessToken() {
   const email = await getUserEmail();
 
+  if (!email) return;
   const user = await prisma.user.findUnique({
     where: {
       email: email,
