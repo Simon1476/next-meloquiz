@@ -1,11 +1,11 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import useToken from "@/lib/useToken";
 
 import { searchTrack } from "@/api/searchTrack";
 import Image from "next/image";
 
 import SpotifyPlayer from "react-spotify-web-playback";
+import useToken from "@/hooks/useToken";
 
 export default function Player() {
   const [searchInput, setSearchInput] = useState("");
@@ -69,7 +69,7 @@ export default function Player() {
         }}
         className="rounded-2xl w-full max-w-xs"
       />
-      <div className="pb-24 mt-5 overflow-hidden grid gap-5 grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+      <div className="pb-24 mt-5 grid gap-5 grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
         {searchResults.map(
           (
             track: {
@@ -103,7 +103,7 @@ export default function Player() {
       </div>
       <div className="fixed bottom-0 w-full">
         {/* <WebPlayback  /> */}
-        {token ? (
+        {token && searchInput !== "" ? (
           <SpotifyPlayer
             token={token}
             // uris={searchResults.map((item: { uri: string }) => item.uri)}
@@ -117,9 +117,12 @@ export default function Player() {
               trackNameColor: "#fff",
             }}
             play
+            showSaveIcon
           />
         ) : (
-          <></>
+          <>
+            <p>If you Login, Music Player will be available</p>
+          </>
         )}
       </div>
     </div>
