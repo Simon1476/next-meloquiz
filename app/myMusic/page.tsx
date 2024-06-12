@@ -1,4 +1,8 @@
-import { getMyPlayListInfo, getMyPlayLists } from "@/lib/spotify";
+import {
+  getMyPlayListInfo,
+  getMyPlayLists,
+  getMyPlayListsId,
+} from "@/lib/spotify";
 import styles from "./myMusic.module.css";
 import Image from "next/image";
 import { getAccessToken } from "@/lib/auth-action";
@@ -8,7 +12,8 @@ import PlayListPlayer from "@/components/music-player";
 export default async function MyMusicPage() {
   const playLists = await getMyPlayLists();
   const token = (await getAccessToken()) as string;
-  const playlistUri = playLists.map((song: { uri: string }) => song.uri);
+
+  const playListId = await getMyPlayListsId();
 
   const totalDuration = playLists.reduce(
     (accumulator: number, currentSong: { duration: number }) => {
@@ -28,6 +33,7 @@ export default async function MyMusicPage() {
           width={320}
           height={320}
           className="mr-6 rounded-md"
+          style={{ width: "auto", height: "auto" }}
         />
         <div className="flex flex-col justify-between gap-10 pt-14">
           <span>플레이리스트</span>
@@ -48,14 +54,14 @@ export default async function MyMusicPage() {
           <div className={styles.flex3}>추가한 날짜</div>
           <div className={styles.flex1}>타이머</div>
         </div>
+        <div className="w-full">
+          <PlayListPlayer
+            playListId={playListId}
+            playLists={playLists}
+            token={token}
+          />
+        </div>
       </main>
-      <div className="w-full">
-        <PlayListPlayer
-          playLists={playLists}
-          token={token}
-          uris={playlistUri}
-        />
-      </div>
     </div>
   );
 }
