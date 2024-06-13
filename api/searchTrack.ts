@@ -1,7 +1,7 @@
 export async function searchTrack(searchQuery: string, token: string) {
   try {
     const res = await fetch(
-      `https://api.spotify.com/v1/search?q=${searchQuery}&type=track&limit=10`,
+      `https://api.spotify.com/v1/search?q=${searchQuery}&type=track&limit=20`,
       {
         headers: {
           Authorization: "Bearer " + token,
