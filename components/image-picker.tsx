@@ -30,12 +30,12 @@ export default function ImagePicker({ label, name }: Props) {
   };
   return (
     <div>
-      <label htmlFor={name} className="block mb-2">
+      <label htmlFor={name} className="block mb-2 text-amber-500">
         {label}
       </label>
-      <div className="flex items-start gap-6 mb-4">
+      <div className="flex items-start gap-6">
         <div className="relative w-40 h-40 flex justify-center items-center border-2 border-solid">
-          {!pickedImage && <p className="m-0 p-4">No image picked yet</p>}
+          {!pickedImage && <p className="m-0 p-4 ">No image picked yet</p>}
           {pickedImage && (
             <Image
               src={pickedImage}

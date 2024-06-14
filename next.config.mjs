@@ -14,6 +14,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: env.process.S3_BUCKET_NAME,
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
