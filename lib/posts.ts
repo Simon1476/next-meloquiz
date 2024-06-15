@@ -6,8 +6,18 @@ import { prisma } from "@/auth";
 import { getUserEmail } from "./session";
 
 const s3 = new S3({
-  region: " ap-northeast-2",
+  region: process.env.AWS_REGION,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+  },
 });
+
+export async function getPosts() {
+  const posts = await prisma.post.findMany();
+
+  return posts;
+}
 
 export async function savePost(post: Post) {
   post.slug = slugify(post.song, { lower: true });
@@ -20,7 +30,7 @@ export async function savePost(post: Post) {
   const bufferedImage = await post.image.arrayBuffer();
 
   s3.putObject({
-    Bucket: "meloquiz-nextjs-posts-image",
+    Bucket: process.env.S3_BUCKET_NAME,
     Key: fileName,
     Body: Buffer.from(bufferedImage),
     ContentType: post.image.type,
@@ -36,12 +46,16 @@ export async function savePost(post: Post) {
       email: userEmail,
     },
   });
-  if (user) {
-    await prisma.post.create({
-      data: {
-        ...post,
-        userId: user?.id as string,
-      },
-    });
-  }
+  await prisma.post.create({
+    data: {
+      song: post.song,
+      singer: post.singer,
+      releaseDate: post.releaseDate,
+      genre: post.genre,
+      instructions: post.instructions,
+      image: post.image,
+      slug: post.slug,
+      userId: user?.id as string,
+    },
+  });
 }

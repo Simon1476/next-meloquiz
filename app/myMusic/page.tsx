@@ -25,7 +25,7 @@ export default async function MyMusicPage() {
   const playListInfo = await getMyPlayListInfo();
   const totalSongs = playLists.length;
   return (
-    <div className="pt-24 text-white max-w-6xl mx-auto h-screen">
+    <div className="text-white max-w-6xl mx-auto h-screen">
       <header className="flex mb-6">
         <Image
           src={playListInfo?.playListThumnail}
