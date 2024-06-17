@@ -3,7 +3,7 @@
 import Image from "next/image";
 import SpotifyPlayer from "react-spotify-web-playback";
 
-import styles from "../app/myMusic/myMusic.module.css";
+import styles from "../app/playlists/myMusic.module.css";
 import formatDuration from "@/lib/format";
 import { useState } from "react";
 
@@ -56,7 +56,7 @@ export default function PlayListPlayer({
   return (
     <>
       {showDodal && <Modal onClose={handleClose} onDelete={handleDeletItem} />}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 h-96 overflow-y-auto">
         {playLists &&
           playLists.map(
             (
@@ -72,7 +72,7 @@ export default function PlayListPlayer({
             ) => (
               <div
                 key={song.uri}
-                className="flex felx-row items-center hover:bg-sky-700"
+                className="flex flex-row items-center hover:bg-sky-700"
               >
                 <div className="flex justify-center items-center mr-3">
                   {index + 1}
@@ -97,7 +97,9 @@ export default function PlayListPlayer({
                 <div className={`${styles.flex3}`}>
                   <span>{song.albumName}</span>
                 </div>
-                <div className={`text-white ${styles.flex3}`}>7시간전</div>
+                <div className={`text-white hidden md:block ${styles.flex3}`}>
+                  7시간전
+                </div>
                 <div className={`flex items-center ${styles.flex1}`}>
                   {formatDuration(song.duration)}
                 </div>
@@ -108,21 +110,23 @@ export default function PlayListPlayer({
               </div>
             )
           )}
-        <SpotifyPlayer
-          token={token}
-          // uris={searchResults.map((item: { uri: string }) => item.uri)}
-          uris={[songUri]}
-          styles={{
-            bgColor: "#333",
-            color: "#fff",
-            sliderColor: "#1cb954",
-            sliderHandleColor: "#fff",
-            trackArtistColor: "#ccc",
-            trackNameColor: "#fff",
-          }}
-          play
-          showSaveIcon
-        />
+        <div className="sticky bottom-0">
+          <SpotifyPlayer
+            token={token}
+            // uris={searchResults.map((item: { uri: string }) => item.uri)}
+            uris={[songUri]}
+            styles={{
+              bgColor: "#333",
+              color: "#fff",
+              sliderColor: "#1cb954",
+              sliderHandleColor: "#fff",
+              trackArtistColor: "#ccc",
+              trackNameColor: "#fff",
+            }}
+            play
+            showSaveIcon
+          />
+        </div>
       </div>
     </>
   );

@@ -12,6 +12,8 @@ import {
   TbPlayerPauseFilled,
 } from "react-icons/tb";
 import Image from "next/image";
+import LoadingIndicator from "./loading";
+
 export default function SongPreview() {
   const { token } = useToken();
   const { songs, isLoading, isError } = useSongsBySinger("Iu", token);
@@ -29,7 +31,6 @@ export default function SongPreview() {
   const durationRef = useRef<HTMLDivElement>(null);
 
   const handlePlayPause = () => {
-    if (audioRef.current !== null) audioRef.current.play();
     setIsPlaying(!isPlaying);
   };
 
@@ -43,11 +44,11 @@ export default function SongPreview() {
   const handleCheckDuration = (e: React.MouseEvent<HTMLDivElement>) => {
     if (durationRef.current !== null && audioRef.current !== null) {
       let width = durationRef.current.clientWidth;
+      console.log(`width=${width}`);
       const offset = e.nativeEvent.offsetX;
-
-      const progress = (offset / width) * 100; // 전체 진척도
-      audioRef.current.currentTime =
-        (progress / 100) * audioRef.current.duration;
+      console.log(`offset=${offset}`);
+      const progress = offset / width; // 전체 진척도
+      audioRef.current.currentTime = progress * audioRef.current.duration;
     }
   };
 
@@ -64,7 +65,6 @@ export default function SongPreview() {
   };
 
   const handleSkipBack = () => {
-    console.log(activeSongIndex);
     if (activeSongIndex === 0) {
       setActiveSongIndex(songs.length - 1);
     } else {
@@ -106,21 +106,23 @@ export default function SongPreview() {
       }
     }
   }, [isPlaying]);
-
   if (isError) return "An error has occurred.";
 
-  if (isLoading) return <span className="text-white">Loading...</span>;
+  if (isLoading) return <LoadingIndicator />;
 
   return (
-    <div>
-      <div className="flex flex-row justify-center items-center gap-8 mb-60 overflow-hidden ">
+    <div className="relative h-full">
+      <div className="flex flex-row justify-center items-center gap-8">
         <div>
-          <Image
-            src={showAnswer.imageSrc}
-            width={300}
-            height={300}
-            alt="Album image"
-          />
+          <div className="relative w-80 h-80">
+            <Image
+              src={showAnswer.imageSrc}
+              fill
+              sizes="100vw"
+              alt="Album image"
+              priority
+            />
+          </div>
           <button
             className="flex items-center gap-4 text-white mt-4"
             onClick={handleCheckAnswer}
@@ -129,6 +131,7 @@ export default function SongPreview() {
             <FaCheck />
           </button>
         </div>
+
         <div className="text-4xl">{showAnswer.songName}</div>
       </div>
 
@@ -140,7 +143,7 @@ export default function SongPreview() {
         />
       )}
 
-      <div className="flex flex-col justify-between items-center p-4 bg-slate-500 text-white w-full">
+      <div className="sticky bottom-0 flex flex-col justify-between items-center p-4 bg-slate-500 text-white w-full">
         <div className="flex items-center gap-8">
           <TbPlayerSkipBackFilled
             className="cursor-pointer text-3xl"

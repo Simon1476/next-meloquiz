@@ -1,5 +1,21 @@
 import { getAccessToken } from "@/lib/auth-action";
 
+export async function getGenres() {
+  const token = await getAccessToken();
+  const res = await fetch(
+    "https://api.spotify.com/v1/recommendations/available-genre-seeds",
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+
+  const data = await res.json();
+  console.log(data);
+  return data;
+}
+
 export async function getUserId() {
   const token = await getAccessToken();
   try {

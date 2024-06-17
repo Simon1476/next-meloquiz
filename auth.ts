@@ -1,7 +1,7 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 
-import NextAuth, { type User } from "next-auth";
+import NextAuth from "next-auth";
 
 import authConfig from "./auth.config";
 

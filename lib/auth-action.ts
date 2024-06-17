@@ -14,7 +14,7 @@ export async function SignOut() {
     },
   });
 
-  return await signOut({ redirect: true, redirectTo: "/" });
+  return await signOut({ redirect: true, redirectTo: "/login" });
 }
 
 export async function getAccessToken() {

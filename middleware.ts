@@ -1,6 +1,7 @@
-import { type NextRequest } from "next/server";
 import authConfig from "./auth.config";
 import NextAuth from "next-auth";
+
+import { NextRequest, NextResponse } from "next/server";
 
 // Use only one of the two middleware options below
 // 1. Use middleware directly
@@ -9,7 +10,13 @@ import NextAuth from "next-auth";
 // 2. Wrapped middleware option
 const { auth } = NextAuth(authConfig);
 export default auth(async function middleware(req: NextRequest) {
-  // Your custom middleware logic goes here
+  // const session = await auth();
+  // console.log(req.nextUrl.pathname);
+  // if (!session && req.nextUrl.pathname.startsWith("/")) {
+  //   return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_HOST}/login`);
+  // }
 });
 
-// export { auth as middleware } from "@/auth";
+// export const config = {
+//   matcher: ["/", "/login"],
+// };
