@@ -13,8 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const sesstion = await auth();
-
   const session = await auth();
 
   if (!session) {
@@ -22,7 +20,7 @@ export default async function Home() {
   }
 
   let playlistId = "";
-  if (sesstion) {
+  if (session) {
     playlistId = await getMyPlayListsId();
   }
   return (
