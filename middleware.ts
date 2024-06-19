@@ -2,21 +2,24 @@ import authConfig from "./auth.config";
 import NextAuth from "next-auth";
 
 import { NextRequest, NextResponse } from "next/server";
+import { auth as sessionCheck } from "@/auth";
 
-// Use only one of the two middleware options below
-// 1. Use middleware directly
-// export const { auth: middleware } = NextAuth(authConfig)
-
-// 2. Wrapped middleware option
 const { auth } = NextAuth(authConfig);
 export default auth(async function middleware(req: NextRequest) {
-  // const session = await auth();
-  // console.log(req.nextUrl.pathname);
-  // if (!session && req.nextUrl.pathname.startsWith("/")) {
-  //   return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_HOST}/login`);
-  // }
+  const session = await sessionCheck();
+  const reqUrl = new URL(req.nextUrl);
+
+  console.log("reqUrl=", req.nextUrl);
+  if (!session && req.nextUrl.pathname !== "/login") {
+    return NextResponse.redirect(
+      new URL(
+        `api/auth/signin?callbackUrl=${encodeURIComponent(reqUrl.pathname)}`,
+        req.nextUrl
+      )
+    );
+  }
 });
 
-// export const config = {
-//   matcher: ["/", "/login"],
-// };
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};

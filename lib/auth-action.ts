@@ -4,7 +4,7 @@ import { signOut } from "@/auth";
 import { getUserEmail } from "./session";
 
 export async function SignIn() {
-  return await signIn("spotify");
+  return await signIn("spotify", { redirect: true, redirectTo: "/" });
 }
 
 export async function SignOut() {
