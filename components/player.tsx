@@ -188,7 +188,10 @@ export default function Player({ playlistId }: { playlistId: string }) {
           />
         ) : (
           <>
-            <p>If you Login, Music Player will be available</p>
+            <p className="text-center">
+              If you Login or Search something you want to listen to and the
+              Music Player will be available
+            </p>
           </>
         )}
       </div>
