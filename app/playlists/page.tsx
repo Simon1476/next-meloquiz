@@ -20,11 +20,11 @@ export const metadata: Metadata = {
 };
 
 export default async function PlaylistPage() {
-  const session = await auth();
+  // const session = await auth();
 
-  if (!session) {
-    return redirect("/login");
-  }
+  // if (!session) {
+  //   return redirect("/login");
+  // }
 
   const playLists = await getMyPlayLists();
   const token = (await getAccessToken()) as string;
