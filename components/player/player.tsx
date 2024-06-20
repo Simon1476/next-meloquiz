@@ -8,7 +8,7 @@ import SpotifyPlayer from "react-spotify-web-playback";
 import useToken from "@/hooks/useToken";
 
 import { FaRegBookmark } from "react-icons/fa6";
-import LoadingIndicator from "./loading";
+import LoadingIndicator from "../ui/loading";
 
 export default function Player({ playlistId }: { playlistId: string }) {
   const [searchInput, setSearchInput] = useState("");

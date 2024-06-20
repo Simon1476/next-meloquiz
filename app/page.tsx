@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
-import Player from "@/components/player";
+import Player from "@/components/player/player";
 import { getMyPlayListsId } from "@/lib/spotify";
 
 import type { Metadata } from "next";

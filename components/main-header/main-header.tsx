@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import NavLink from "./nav-link";
 
-import SignOutButton from "../signOut-button";
+import SignOutButton from "../auth/signOut-button";
 import MobileNav from "./mobile-nav";
 
 export default async function MainHeader() {

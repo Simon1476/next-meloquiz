@@ -1,7 +1,7 @@
 "use client";
 
-import ImagePicker from "@/components/image-picker";
-import SongsFormSubmit from "@/components/songs-form-submit";
+import SongsFormSubmit from "@/components/songs/songs-form-submit";
+import ImagePicker from "@/components/ui/image-picker";
 import shareSong from "@/lib/songs-action";
 import { useFormState } from "react-dom";
 

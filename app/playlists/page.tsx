@@ -7,11 +7,12 @@ import styles from "./myMusic.module.css";
 import Image from "next/image";
 import { getAccessToken } from "@/lib/auth-action";
 import formatDuration from "@/lib/format";
-import PlayListPlayer from "@/components/music-player";
+
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
 import type { Metadata } from "next";
+import PlayListPlayer from "@/components/player/playList-player";
 
 export const metadata: Metadata = {
   title: "Playlist",
@@ -20,11 +21,11 @@ export const metadata: Metadata = {
 };
 
 export default async function PlaylistPage() {
-  // const session = await auth();
+  const session = await auth();
 
-  // if (!session) {
-  //   return redirect("/login");
-  // }
+  if (!session) {
+    return redirect("/login");
+  }
 
   const playLists = await getMyPlayLists();
   const token = (await getAccessToken()) as string;

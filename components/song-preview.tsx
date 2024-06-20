@@ -12,7 +12,7 @@ import {
   TbPlayerPauseFilled,
 } from "react-icons/tb";
 import Image from "next/image";
-import LoadingIndicator from "./loading";
+import LoadingIndicator from "./ui/loading";
 
 export default function SongPreview() {
   const { token } = useToken();
@@ -111,8 +111,8 @@ export default function SongPreview() {
   if (isLoading) return <LoadingIndicator />;
 
   return (
-    <div className="relative h-full">
-      <div className="flex flex-row justify-center items-center gap-8">
+    <div className="flex flex-col">
+      <div className="flex flex-row justify-center items-center gap-8 pb-44">
         <div>
           <div className="relative w-80 h-80">
             <Image
@@ -143,7 +143,7 @@ export default function SongPreview() {
         />
       )}
 
-      <div className="sticky bottom-0 flex flex-col justify-between items-center p-4 bg-slate-500 text-white w-full">
+      <div className="flex flex-col justify-between items-center p-4 bg-slate-500 text-white w-full">
         <div className="flex items-center gap-8">
           <TbPlayerSkipBackFilled
             className="cursor-pointer text-3xl"

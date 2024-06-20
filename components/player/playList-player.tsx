@@ -3,12 +3,12 @@
 import Image from "next/image";
 import SpotifyPlayer from "react-spotify-web-playback";
 
-import styles from "../app/playlists/myMusic.module.css";
+import styles from "../../app/playlists/myMusic.module.css";
 import formatDuration from "@/lib/format";
 import { useState } from "react";
 
 import { MdDeleteForever } from "react-icons/md";
-import Modal from "./modal";
+import Modal from "../ui/modal";
 
 type Props = {
   token: string;
