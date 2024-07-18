@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { savePost } from "./posts";
+import { revalidatePath } from "next/cache";
 
 const postSchema = z.object({
   song: z.string().min(1, { message: "최소 1자리를 입력해야 합니다." }),
@@ -41,6 +42,7 @@ export default async function shareSong(
   // console.log("validation.error=", validation.error?.issues[0].message);
   if (validation.success) {
     savePost(validation.data);
+    revalidatePath("/songs");
     redirect("/songs");
   } else {
     const message = validation.error?.issues[0].message;

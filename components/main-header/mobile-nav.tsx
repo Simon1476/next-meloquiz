@@ -4,6 +4,7 @@ import NavLink from "./nav-link";
 
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoBackspace } from "react-icons/io5";
+import { SignOut } from "@/lib/auth-action";
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -39,6 +40,7 @@ export default function MobileNav() {
               <span>Exit</span>
             </div>
           </li>
+          <li onClick={() => SignOut()}>로그아웃</li>
         </ul>
       )}
     </>

@@ -89,13 +89,8 @@ Next.js와 Auth.js의 OAuth 인증을 이용하여 Spotify 로그인과 로그�
 
 - 메인화면에서 플레이 리스트에 추가된 곡은 특정 색깔로 마킹
 
-<<<<<<< HEAD
 ### 개발 일지 블로그
+
+하루하루 모든 기록을 기록한 건 아니지만 초기에 어떤 식으로 구성을 했고 일부 기능들을 구현한 절차에 대해서 작성했다.
 
 [개발 블로그 페이지 링크](https://velog.io/@white0_0/Next-authNext-auth%EB%A1%9C-Spotify-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%95%98%EA%B8%B0/)
-=======
-
-### 개발 일지 블로그
-하루하루 모든 기록을 기록한 건 아니지만 초기에 어떤 식으로 구성을 했고 일부 기능들을 구현한 절차에 대해서 작성했다.
- [개발 블로그 페이지 링크](https://velog.io/@white0_0/Next-authNext-auth%EB%A1%9C-Spotify-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%95%98%EA%B8%B0/)
->>>>>>> 809b00770afe82f8fe75cd369ca5e671430bd6bc

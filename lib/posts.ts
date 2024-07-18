@@ -19,6 +19,16 @@ export async function getPosts() {
   return posts;
 }
 
+export async function getPost(songSlug: string) {
+  const post = await prisma.post.findUniqueOrThrow({
+    where: {
+      slug: songSlug,
+    },
+  });
+
+  return post;
+}
+
 export async function savePost(post: Post) {
   post.slug = slugify(post.song, { lower: true });
   post.instructions = xss(post.instructions);
